@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件傳輸</title>
+</head>
+<body>
+<h2>使用WebSocket傳輸文件</h2>
+
+<div>
+    <input type="text" name="fromUser" id="fromUser">
+    <button onclick="webSocketClient.connection()">連接</button><br/>
+
+    <label for="toUser">接收人：</label>
+    <input type="text" name="toUser" id="toUser">
+
+    <label for="content">内容：</label>
+    <input type="text" name="content" id="content">
+    <button onclick="webSocketClient.send()">發送</button><br/>
+
+    <input type="text" name="fileName" id="fileName">
+    <button onclick="download()">下載</button>
+</div>
+<div>
+    <h2>消息内容</h2>
+    <span id="msg"></span>
+</div>
+
+<script
+        src="http://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+<script>
+    var download = function(){
+        var fileName = $("#fileName").val();
+        console.log(fileName);
+    };
+
+    var webSocketClient = (function(){
+
+        var webSocket = null;
+
+        connection = function(){
+            if("WebSocket" in window){
+                console.log("open connection");
+
+                var fromUser = $("#fromUser").val();
+                webSocket = new WebSocket("ws://" + window.location.host + "/chat/" + fromUser);
+
+                if(webSocket != null){
+                    webSocket.onopen = function(){
+                        console.log("open");
+                    };
+
+                    webSocket.onmessage = function(event){
+                        console.log("message...")
+                        $("#msg").html(event.data);
+                    }
+
+                    webSocket.onclose = function(){
+                        console.log("close");
+                    }
+
+                    webSocket.onerror = function(){
+                        console.log("error");
+                    }
+
+                    window.onbeforeunload = function(){
+                        webSocket.close();
+                    }
+                }
+
+            }else{
+                alert("瀏覽器不支持WebSocket！")
+            }
+        }
+
+        send = function(){
+            if(webSocket != null){
+                var user = $("#toUser").val();
+                var text = $("#content").val();
+                var data = {
+                    user: user,
+                    text: text
+                }
+                var message = JSON.stringify(data);
+                alert(message)
+                webSocket.send(message);
+            }
+        }
+
+        return {
+            connection: connection,
+            send: send
+        };
+    })();
+
+</script>
+</body>
+</html>
