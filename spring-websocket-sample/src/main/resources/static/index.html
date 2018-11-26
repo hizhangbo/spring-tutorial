@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>文件傳輸</title>
+    <title>文本傳輸</title>
 </head>
 <body>
-<h2>使用WebSocket傳輸文件</h2>
+<h2>使用WebSocket傳輸文本</h2>
 
 <div>
     <input type="text" name="fromUser" id="fromUser">
@@ -17,9 +17,6 @@
     <label for="content">内容：</label>
     <input type="text" name="content" id="content">
     <button onclick="webSocketClient.send()">發送</button><br/>
-
-    <input type="text" name="fileName" id="fileName">
-    <button onclick="download()">下載</button>
 </div>
 <div>
     <h2>消息内容</h2>
@@ -31,11 +28,6 @@
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
 <script>
-    var download = function(){
-        var fileName = $("#fileName").val();
-        console.log(fileName);
-    };
-
     var webSocketClient = (function(){
 
         var webSocket = null;
@@ -94,7 +86,6 @@
             send: send
         };
     })();
-
 </script>
 </body>
 </html>

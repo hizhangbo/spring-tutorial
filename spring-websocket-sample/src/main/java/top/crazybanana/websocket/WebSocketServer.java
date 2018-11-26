@@ -19,11 +19,14 @@ public class WebSocketServer implements WebSocketConfigurer {
 
     private TextMessageHandler textMessageHandler;
 
+    private BinaryMessageHandler binaryMessageHandler;
+
     private ValidInterceptor validInterceptor;
 
     @Autowired
-    public WebSocketServer(TextMessageHandler textMessageHandler, ValidInterceptor validInterceptor){
+    public WebSocketServer(TextMessageHandler textMessageHandler, BinaryMessageHandler binaryMessageHandler, ValidInterceptor validInterceptor) {
         this.textMessageHandler = textMessageHandler;
+        this.binaryMessageHandler = binaryMessageHandler;
         this.validInterceptor = validInterceptor;
     }
 
@@ -31,7 +34,7 @@ public class WebSocketServer implements WebSocketConfigurer {
     public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
         webSocketHandlerRegistry
                 .addHandler(textMessageHandler, "chat/*")
-//                .addHandler(binaryMessageHandler, "download/*")
+                .addHandler(binaryMessageHandler, "download/*")
                 .addInterceptors(validInterceptor);
     }
 }

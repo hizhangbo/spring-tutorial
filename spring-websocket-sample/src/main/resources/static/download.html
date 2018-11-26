@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下载文件</title>
+</head>
+<body>
+<h2>使用WebSocket下载文件</h2>
+
+<div>
+    <button onclick="webSocketClient.connection()">連接</button>
+    <br/>
+
+    <input type="text" name="fileName" id="fileName">
+    <button onclick="webSocketClient.download()">下載</button>
+</div>
+
+<script
+        src="http://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+<script>
+    var webSocketClient = (function () {
+
+        var webSocket = null;
+
+        connection = function () {
+            if ("WebSocket" in window) {
+                console.log("open connection");
+
+                var fileName = $("#fileName").val();
+                webSocket = new WebSocket("ws://" + window.location.host + "/download/" + fileName);
+
+                if (webSocket != null) {
+                    webSocket.onopen = function () {
+                        console.log("open");
+                    };
+
+                    webSocket.onmessage = function (event) {
+                        console.log("message...");
+                        if (event.data instanceof Blob) {
+                            saveData(event.data, "Dua Lipa - New Rules (Official Music Video).mp3");
+                        } else {
+                            alert(event.data);
+                        }
+                    }
+
+                    webSocket.onclose = function () {
+                        console.log("close");
+                    }
+
+                    webSocket.onerror = function () {
+                        console.log("error");
+                    }
+
+                    window.onbeforeunload = function () {
+                        webSocket.close();
+                    }
+                }
+
+            } else {
+                alert("瀏覽器不支持WebSocket！")
+            }
+        }
+
+        var download = function () {
+            var fileName = $("#fileName").val();
+            webSocket.send(fileName);
+        };
+
+        var saveData = (function () {
+            var a = document.createElement("a");
+            document.body.appendChild(a);
+            a.style = "display: none";
+            return function (data, fileName) {
+                var blob = new Blob([data], {type: "octet/stream"}),
+                    url = window.URL.createObjectURL(blob);
+                a.href = url;
+                a.download = fileName;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            };
+        }());
+
+        return {
+            connection: connection,
+            download: download
+        };
+    })();
+
+</script>
+</body>
+</html>
