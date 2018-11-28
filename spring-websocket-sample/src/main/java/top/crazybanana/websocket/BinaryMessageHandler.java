@@ -35,11 +35,8 @@ public class BinaryMessageHandler extends BinaryWebSocketHandler {
         String fileName = null;
         try {
             fileName = URLDecoder.decode(session.getAttributes().get("name").toString(), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        try {
-            File file = new File("E:\\Project\\Program\\IdeaProjects\\spring-tutorial\\spring-websocket-sample\\src\\main\\resources\\file\\" + fileName);
+            String path = this.getClass().getClassLoader().getResource("file/" + fileName).getPath();
+            File file = new File(path);
             byte[] fileSize = Files.readAllBytes(file.toPath());
             try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
                 fileOutputStream.write(fileSize);
@@ -49,7 +46,7 @@ public class BinaryMessageHandler extends BinaryWebSocketHandler {
             session.sendMessage(binaryMessage);
 
         } catch (IOException e) {
-            log.error("websocket传输 {} 文件失败：{}", fileName, e.getMessage());
+            log.error("websocket下载 {} 文件失败：{}", fileName, e.toString());
         }
     }
 

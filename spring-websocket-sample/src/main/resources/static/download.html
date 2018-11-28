@@ -39,23 +39,23 @@
                     webSocket.onmessage = function (event) {
                         console.log("message...");
                         if (event.data instanceof Blob) {
-                            saveData(event.data, "Dua Lipa - New Rules (Official Music Video).mp3");
+                            saveData(event.data, fileName);
                         } else {
                             alert(event.data);
                         }
-                    }
+                    };
 
                     webSocket.onclose = function () {
                         console.log("close");
-                    }
+                    };
 
                     webSocket.onerror = function () {
                         console.log("error");
-                    }
+                    };
 
                     window.onbeforeunload = function () {
                         webSocket.close();
-                    }
+                    };
                 }
 
             } else {
@@ -73,6 +73,10 @@
             document.body.appendChild(a);
             a.style = "display: none";
             return function (data, fileName) {
+                // var builder = new BolbBuilder();
+                // builder.append(data);
+                // var blob = builder.getBlob("octet/stream");
+
                 var blob = new Blob([data], {type: "octet/stream"}),
                     url = window.URL.createObjectURL(blob);
                 a.href = url;
