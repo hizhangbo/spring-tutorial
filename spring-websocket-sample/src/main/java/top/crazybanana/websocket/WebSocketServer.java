@@ -34,6 +34,7 @@ public class WebSocketServer implements WebSocketConfigurer {
         webSocketHandlerRegistry
                 .addHandler(textMessageHandler, "chat/*")
                 .addHandler(binaryMessageHandler, "download/*")
-                .addInterceptors(validInterceptor);
+                .addInterceptors(validInterceptor)
+                .setAllowedOrigins("*");
     }
 }

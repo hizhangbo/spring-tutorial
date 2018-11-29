@@ -36,8 +36,9 @@ public class TextMessageHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        if(session.isOpen()){
-            session.close(status);
+        String name = (String) session.getAttributes().get("name");
+        if(clients.keySet().contains(name)){
+            clients.remove(name);
         }
     }
 
