@@ -1,0 +1,12 @@
+spring:
+  session:
+    store-type: none
+
+security:
+  basic:
+    enabled: false
+
+customer:
+  security:
+    browser:
+      loginPage: /demo-login.html

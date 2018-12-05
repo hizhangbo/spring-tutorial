@@ -19,4 +19,5 @@
         <module>spring-security-browser</module>
         <module>spring-security-app</module>
     </modules>
+
 </project>
