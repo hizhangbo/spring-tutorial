@@ -1,0 +1,160 @@
+html,body {
+    background-color: #000000;
+    margin: 0px;
+    overflow: hidden;
+}
+
+#info {
+    position: absolute;
+    top: 200px;
+    width: 100%;
+    color: #ffffff;
+    padding: 5px;
+    font-family: Monospace;
+    text-align: center;
+}
+
+    #info span {
+        color: #ffffff;
+        font-size: 60px;
+        font-weight: bold;
+    }
+
+#audioSlider {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    width: 20px;
+    margin-right: 20px;
+}
+
+.my-navbar {
+    padding: 20px 0;
+    transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+}
+
+    .my-navbar a {
+        background: transparent !important;
+        color: #fff !important
+    }
+
+        .my-navbar a:hover {
+            color: #45bcf9 !important;
+            background: transparent;
+            outline: 0
+        }
+
+    .my-navbar a {
+        transition: color 0.5s ease-in-out;
+    }
+/*-webkit-transition ;-moz-transition*/
+.top-nav {
+    padding: 0;
+    background: #000;
+}
+
+button.navbar-toggle {
+    background-color: #fbfbfb;
+}
+    /*整个背景都是transparent透明的，会看不到，所以再次覆盖一下*/
+    button.navbar-toggle > span.icon-bar {
+        background-color: #dedede
+    }
+
+.icon {
+    background: url(../bootstrap/img/glyphicons-halflings-white.png) no-repeat;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.icon-music {
+    background-position: -24px 0px;
+}
+
+.icon-quiet {
+    background-position: -360px -24px;
+}
+
+.container{
+height: 100%;
+align-content: center;
+}
+
+.card{
+height: 370px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #FFC312;
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: white;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.login_btn{
+color: black;
+background-color: #FFC312;
+width: 100px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}

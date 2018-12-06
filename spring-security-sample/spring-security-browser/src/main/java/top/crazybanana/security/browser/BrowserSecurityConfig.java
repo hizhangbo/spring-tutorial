@@ -7,7 +7,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import top.crazybanana.security.core.properties.SecurityProperties;
+
+import javax.annotation.Resource;
 
 /**
  * @author: Bob
@@ -18,6 +21,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SecurityProperties securityProperties;
+
+    @Resource
+    private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
     /**
      * 配置表單登錄/Http Basic登錄
@@ -34,14 +40,23 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/authentication/require")
                 .loginProcessingUrl("/authentication/require")
+                .successHandler(myAuthenticationSuccessHandler)
 //                http.httpBasic()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/authentication/require",
                         "/login",
+                        "/bootstrap/**",
+                        "/css/**",
+                        "/images/**",
+                        "/music/**",
+                        "/scripts/**",
+                        "/favicon.ico",
                         securityProperties.getBrowser().getLoginPage()).permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .csrf().disable();
     }
 
     @Bean

@@ -3,10 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo Login</title>
+    <link href="/css/login.css" rel="stylesheet" />
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-<div>
-    <h1>Demo Login</h1>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">Bob</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#tab" aria-controls="tab" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="tab">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">首页</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">日志</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">关于</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container">
+
 </div>
+<div id="info">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>Welcome</h3>
+                <div class="d-flex justify-content-end social_icon">
+                    <span><i class="fab fa-facebook-square"></i></span>
+                    <span><i class="fab fa-google-plus-square"></i></span>
+                    <span><i class="fab fa-twitter-square"></i></span>
+                </div>
+            </div>
+            <div class="card-body">
+                <form action="/authentication/require" method="post">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" name="username" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="row align-items-center remember">
+                        <input type="checkbox">Remember Me
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn float-right login_btn">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    Don't have an account?<a href="#">Sign Up</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="#">Forgot your password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="icon icon-music" id="sound">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+
+<audio autoplay loop id="bgm" hidden>
+    <source src="/music/JJD-Aeon.mp3" type="audio/mpeg">
+    <source src="/music/JJD-Aeon.mp3" type="audio/ogg">
+    <embed height="50" width="100" src="/music/JJD-Aeon.mp3">
+</audio>
+
+<script src="/scripts/jquery-1.10.2.min.js"></script>
+<script src="/bootstrap/js/popper.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/scripts/three.min.js"></script>
+<script src="/scripts/master.js"></script>
 </body>
 </html>
