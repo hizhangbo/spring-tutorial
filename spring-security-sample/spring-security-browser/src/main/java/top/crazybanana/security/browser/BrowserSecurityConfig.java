@@ -1,5 +1,6 @@
 package top.crazybanana.security.browser;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,8 +8,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import top.crazybanana.security.core.properties.SecurityProperties;
+import top.crazybanana.security.core.validate.code.ValidateCodeFilter;
 
 import javax.annotation.Resource;
 
@@ -25,6 +29,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
+    @Resource
+    private AuthenticationFailureHandler myAuthenticationFailureHandler;
+
     /**
      * 配置表單登錄/Http Basic登錄
      * <p>
@@ -37,10 +44,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
+        ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
+        validateCodeFilter.setAuthenticationFailureHandler(myAuthenticationFailureHandler);
+
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin()
                 .loginPage("/authentication/require")
                 .loginProcessingUrl("/authentication/require")
                 .successHandler(myAuthenticationSuccessHandler)
+                .failureHandler(myAuthenticationFailureHandler)
 //                http.httpBasic()
                 .and()
                 .authorizeRequests()
@@ -52,6 +64,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/music/**",
                         "/scripts/**",
                         "/favicon.ico",
+                        "/code/image",
+                        "/error/**",
                         securityProperties.getBrowser().getLoginPage()).permitAll()
                 .anyRequest()
                 .authenticated()

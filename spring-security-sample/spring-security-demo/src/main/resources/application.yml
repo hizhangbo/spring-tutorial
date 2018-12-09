@@ -8,5 +8,11 @@ security:
 
 customer:
   security:
+    code:
+      image:
+        width: 85
+        height: 36
+        length: 6
+        expireIn: 60
     browser:
       loginPage: /demo-login.html
