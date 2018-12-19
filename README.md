@@ -14,6 +14,9 @@
 >>>
 >>**spring-security-demo**
 >>>
+
+---
+
 >**登录失效跳转**
 
 >集成WebSecurityConfigurerAdapter
@@ -24,6 +27,8 @@
 >BrowserSecurityController
 1. RESTful 接口方式提示
 2. 登录页配置跳转
+
+---
 
 >**自定义登录方式**
 
