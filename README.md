@@ -2,10 +2,24 @@
 
 ## spring security
 
+>**代码结构**
+>>**spring-security-core**
+>>>SecurityCoreConfig
+>>>>SecurityProperties
+>>>>>BrowserProperties
+>>>>>ValidateCodeProperties
+>>**spring-security-browser**
+>>>
+>>**spring-security-app**
+>>>
+>>**spring-security-demo**
+>>>
 >**登录失效跳转**
->WebSecurityConfigurerAdapter
+
+>集成WebSecurityConfigurerAdapter
 1. 配置过滤器
 2. 配置成功/失败处理器
+3. 配置加密方式PasswordEncoder
 
 >BrowserSecurityController
 1. RESTful 接口方式提示
