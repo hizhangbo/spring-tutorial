@@ -4,19 +4,20 @@
 
 > **代码结构**
 1. **spring-security-core**
->> SecurityCoreConfig
->>> SecurityProperties
->>>> BrowserProperties
->>>> ValidateCodeProperties
+> SecurityCoreConfig
+>> SecurityProperties *#安全配置项*
+>>> BrowserProperties *#浏览器登录配置项*
+>>> ValidateCodeProperties *#验证码配置项*
+>>>> ImageCodeProperties *#图片验证码配置项*
 
->> **spring-security-browser**
->>>
+2. **spring-security-browser**
+> MyUserDetailsService -> loadUserByUsername
 
->> **spring-security-app**
->>>
+3. **spring-security-app**
+>
 
->> **spring-security-demo**
->>>
+4. **spring-security-demo**
+>
 
 ---
 
