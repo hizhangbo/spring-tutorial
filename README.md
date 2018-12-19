@@ -35,6 +35,11 @@
 2. 配置成功/失败处理器
 3. 配置加密方式PasswordEncoder
 
+
+*登录成功后，跳转到用户授权受阻的页面*
+*private RequestCache requestCache = new HttpSessionRequestCache();*
+*#登录之前请求的时候，在过滤器链的最后，会发现没有登录，抛出异常，这时候会将当前的request放到HttpSessionRequestCache中，其实就是将request放到了session中，session的名字是“SPRING_SECURITY_SAVED_REQUEST”，等下次执行了登录之后，会先从HttpSessionRequestCache将上一个request拿出来，继续这个request。因此就实现了上一个request继续跳转的功能。*
+
 >BrowserSecurityController
 1. RESTful 接口方式提示
 2. 登录页配置跳转
