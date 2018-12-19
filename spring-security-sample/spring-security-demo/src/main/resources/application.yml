@@ -2,9 +2,9 @@ spring:
   session:
     store-type: none
 
-security:
-  basic:
-    enabled: false
+#security:
+#  basic:
+#    enabled: false
 
 customer:
   security:
@@ -12,7 +12,7 @@ customer:
       image:
         width: 85
         height: 36
-        length: 6
+        length: 1
         expireIn: 60
     browser:
       loginPage: /demo-login.html
