@@ -4,19 +4,19 @@
 
 > **代码结构**
 1. **spring-security-core**
-> SecurityCoreConfig
->> SecurityProperties
->>> BrowserProperties
->>> ValidateCodeProperties
+>> SecurityCoreConfig
+>>> SecurityProperties
+>>>> BrowserProperties
+>>>> ValidateCodeProperties
 
-> **spring-security-browser**
->>
+>> **spring-security-browser**
+>>>
 
-> **spring-security-app**
->>
+>> **spring-security-app**
+>>>
 
-> **spring-security-demo**
->>
+>> **spring-security-demo**
+>>>
 
 ---
 
