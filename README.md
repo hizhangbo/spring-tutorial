@@ -3,27 +3,26 @@
 ## spring security
 
 > **代码结构**
->> **spring-security-core**
->>> SecurityCoreConfig
->>>> SecurityProperties
->>>>> BrowserProperties
+1. **spring-security-core**
+> SecurityCoreConfig
+>> SecurityProperties
+>>> BrowserProperties
+>>> ValidateCodeProperties
 
->>>>> ValidateCodeProperties
+> **spring-security-browser**
+>>
 
->> **spring-security-browser**
->>>
+> **spring-security-app**
+>>
 
->> **spring-security-app**
->>>
-
->> **spring-security-demo**
->>>
+> **spring-security-demo**
+>>
 
 ---
 
->**登录失效跳转**
+> **登录失效跳转**
 
->集成WebSecurityConfigurerAdapter
+> 集成WebSecurityConfigurerAdapter
 1. 配置过滤器
 2. 配置成功/失败处理器
 3. 配置加密方式PasswordEncoder
@@ -34,13 +33,13 @@
 
 ---
 
->**自定义登录方式**
+> **自定义登录方式**
 
 1. BasicAuthentication
 
 2. UsernamePasswordAuthentication
 
->**增加过滤器**
+> **增加过滤器**
 
 1. 图片验证码
 
