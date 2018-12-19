@@ -8,10 +8,13 @@
 >>>> SecurityProperties
 >>>>> BrowserProperties
 >>>>> ValidateCodeProperties
+
 >> **spring-security-browser**
 >>>
+
 >> **spring-security-app**
 >>>
+
 >> **spring-security-demo**
 >>>
 
