@@ -6,7 +6,7 @@
 1. **spring-security-core**
 > SecurityCoreConfig
 >> SecurityProperties *#安全配置项*
->>> BrowserProperties *#浏览器登录配置项*
+>>> BrowserProperties *#浏览器登录配置项*<br/>
 >>> ValidateCodeProperties *#验证码配置项*
 >>>> ImageCodeProperties *#图片验证码配置项*
 
