@@ -7,6 +7,7 @@
 >>> SecurityCoreConfig
 >>>> SecurityProperties
 >>>>> BrowserProperties
+
 >>>>> ValidateCodeProperties
 
 >> **spring-security-browser**
