@@ -27,6 +27,19 @@
 > 
 
 ---
+> **过滤器链执行顺序及作用**
+
+1. ChannelProcessingFilter 访问协议控制过滤器
+2. SecurityContextPersistenceFilter 初始化SecurityContext，请求结束后存入HttpSession,下次访问直接从HttpSession中获取用户信息
+3. ConcurrentSessionFilter 并发访问控制过滤器，多用户同时访问设置了最大并发数量，会将sessioninformation中lastRequest最早的session设置成过期
+4. UsernamePasswordAuthenticationFilter/CasAuthenticationFilter/BasicAuthenticationFilter 将认证信息存入SecurityContextHolder的Authentication对象
+5. SecurityContextHolderAwareRequestFilter ServletRequest封装到HttpServletRequest
+6. JaasApiIntegrationFilter SecurityContextHolder中JaasAuthenticationToken转化为Subject
+7. RememberMeAuthenticationFilter 以上认证过滤器没有对请求处理，则会判断cookie中是否设置remember-me=1，如果有则从cookie解析出user，并进行认证
+8. AnonymousAuthenticationFilter 匿名认证过滤器
+9. ExceptionTranslationFilter 异常处理过滤器
+10. FilterSecurityInterceptor 安全拦截过滤器
+
 
 > **登录失效跳转**
 
@@ -37,7 +50,9 @@
 
 
 *登录成功后，跳转到用户授权受阻的页面*
+
 *private RequestCache requestCache = new HttpSessionRequestCache();*
+
 *#登录之前请求的时候，在过滤器链的最后，会发现没有登录，抛出异常，这时候会将当前的request放到HttpSessionRequestCache中，其实就是将request放到了session中，session的名字是“SPRING_SECURITY_SAVED_REQUEST”，等下次执行了登录之后，会先从HttpSessionRequestCache将上一个request拿出来，继续这个request。因此就实现了上一个request继续跳转的功能。*
 
 >BrowserSecurityController
