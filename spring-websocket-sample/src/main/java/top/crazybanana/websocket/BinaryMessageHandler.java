@@ -10,7 +10,6 @@ import org.springframework.web.socket.handler.BinaryWebSocketHandler;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
@@ -48,17 +47,5 @@ public class BinaryMessageHandler extends BinaryWebSocketHandler {
         } catch (IOException e) {
             log.error("websocket下载 {} 文件失败：{}", fileName, e.toString());
         }
-    }
-
-    /**
-     * 文件上传
-     *
-     * @param session
-     * @param message
-     * @throws Exception
-     */
-    @Override
-    protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws Exception {
-        super.handleBinaryMessage(session, message);
     }
 }

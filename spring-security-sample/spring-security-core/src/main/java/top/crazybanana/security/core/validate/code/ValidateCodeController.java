@@ -28,6 +28,8 @@ public class ValidateCodeController {
 
     private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
+    private Random random = new Random();
+
     @Autowired
     private SecurityProperties securityProperties;
 
@@ -41,11 +43,9 @@ public class ValidateCodeController {
     private ImageCode createImageCode(ServletWebRequest request) {
         int width = ServletRequestUtils.getIntParameter(request.getRequest(), "width", securityProperties.getCode().getImage().getWidth());
         int height = ServletRequestUtils.getIntParameter(request.getRequest(), "height", securityProperties.getCode().getImage().getHeight());
-        ;
+
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
-
-        Random random = new Random();
 
         g.setColor(getRandColor(200, 250));
         g.fillRect(0, 0, width, height);
@@ -58,19 +58,18 @@ public class ValidateCodeController {
             g.drawLine(x, y, x + xl, y + yl);
         }
 
-        String sRand = "";
+        StringBuilder sRand = new StringBuilder();
         for (int i = 0; i < securityProperties.getCode().getImage().getLength(); i++) {
             String rand = String.valueOf(random.nextInt(10));
-            sRand += rand;
+            sRand.append(rand);
             g.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
             g.drawString(rand, 13 * i + 6, 16);
         }
         g.dispose();
-        return new ImageCode(image, sRand, securityProperties.getCode().getImage().getExpireIn());
+        return new ImageCode(image, sRand.toString(), securityProperties.getCode().getImage().getExpireIn());
     }
 
     private Color getRandColor(int fc, int bc) {
-        Random random = new Random();
         if (fc > 255) {
             fc = 255;
         }

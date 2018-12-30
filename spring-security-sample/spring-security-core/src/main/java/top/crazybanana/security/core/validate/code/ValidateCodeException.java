@@ -2,8 +2,6 @@ package top.crazybanana.security.core.validate.code;
 
 import org.springframework.security.core.AuthenticationException;
 
-import java.io.Serializable;
-
 /**
  * @author: Bob
  * @Datetime: 2018-12-09 19:41

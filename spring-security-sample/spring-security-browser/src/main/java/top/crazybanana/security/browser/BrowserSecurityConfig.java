@@ -1,6 +1,5 @@
 package top.crazybanana.security.browser;
 
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +31,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private AuthenticationFailureHandler myAuthenticationFailureHandler;
 
+    private static final String LOGIN_REQUEST_URL = "/authentication/require";
+
     /**
      * 配置表單登錄/Http Basic登錄
      * <p>
@@ -49,14 +50,14 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin()
-                .loginPage("/authentication/require")
-                .loginProcessingUrl("/authentication/require")
+                .loginPage(LOGIN_REQUEST_URL)
+                .loginProcessingUrl(LOGIN_REQUEST_URL)
                 .successHandler(myAuthenticationSuccessHandler)
                 .failureHandler(myAuthenticationFailureHandler)
 //                http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/authentication/require",
+                .antMatchers(LOGIN_REQUEST_URL,
                         "/login",
                         "/bootstrap/**",
                         "/css/**",
